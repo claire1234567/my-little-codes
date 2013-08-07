@@ -1,0 +1,71 @@
+#!/usr/bin/python
+#July 8, 2013
+
+
+
+import math
+
+def main():
+    # run some tests here.
+    """Testing Circle class for area(), move(), 
+    location(), __str__()"""
+    i2 = 0
+    c1 = Circle(0, 0, 5)
+    c2 = Circle(0, 0, 5)
+    for i in range(20):
+        print('--')
+        print('Circle 1: ',c1)
+        print('Circle 2: ',c2)
+        print("Collision? ",Circle.is_collision(c1, c2))
+        i2 += i
+        c1.move(i, i)
+        c2.move(i, i2)
+        
+class Shape:
+    """Shape class provides a move() method."""
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    def location(self, x, y):
+        return "(%d, %d)" % (self.x, self.y)
+    def move(self, deltaX, deltaY):
+        self.x = self.x + deltaX
+        self.y = self.y + deltaY
+        
+class Circle(Shape):
+    """Circle Class: inherits from Shape and has method area"""
+    pi = 3.14159
+    def __init__(self, x=0, y=0, r=1):
+        Shape.__init__(self, x, y)
+        self.radius = r
+    def area(self):
+        """Circle area method: returns the area of the circle."""
+        return self.radius * self.radius * self.pi
+    def __str__(self):
+        return "Circle of radius %s at coordinates (%d, %d) with an area of %f"\
+               % (self.radius, self.x, self.y, Circle.area(self))
+    @classmethod
+    def distance(Circle, c1, c2):
+        """calculate distance between two circles"""
+        pass # fill this in   
+        # distance between the two centers of c1 and c2
+        return (( (c1.x-c2.x)*(c1.x-c2.x) + (c1.y-c2.y)*(c1.y-c2.y) ) ** 0.5)
+        
+        
+    @classmethod
+    def is_collision(Circle, c1, c2):
+        pass # fill this in
+
+        if  Circle.distance(c1, c2) <= (c1.radius + c2.radius):
+            return "True"
+        else:
+            return "False"
+            
+            
+
+        
+        
+# detect running interactively
+if __name__ == '__main__':
+    main()
+
